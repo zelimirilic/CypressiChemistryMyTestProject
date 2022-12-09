@@ -1,0 +1,15 @@
+{
+  "name": "cypressichemistry",
+  "version": "1.0.0",
+  "description": "Automation framework for iChemistry Cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules\\.bin\\cypress run",
+    "cypress:open": "npx cypress open cypress/e2e/LoginPageTest/**/*.cy.js"
+  },
+  "author": "Consolia doo",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^11.2.0"
+  }
+}
