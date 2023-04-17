@@ -4,12 +4,29 @@
   "description": "Automation framework for iChemistry Cypress",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules\\.bin\\cypress run",
-    "cypress:open": "npx cypress open cypress/e2e/LoginPageTest/**/*.cy.js"
+    "cypress-cache-clear": "cypress cache clear",
+    "test": "cypress run",
+    "cypress:open": "npx cypress open cypress/e2e/LoginPageTest/**/*.cy.js",
+    "ui-regression": "cypress run --browser chrome --spec cypress/e2e/LoginPageTest/**.js",
+    "ui-regression-allure": "(rimraf -r allure-results/ allure-report cypress/screenshots || true) && cypress run --browser chrome --spec cypress/e2e/LoginPageTest/**.js --env allure=true && allure generate allure-results --clean -o allure-report && allure open",
+    "allure:clear": "rimraf -r allure-results/ allure-report cypress/screenshots || true",
+    "allure:report": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+    "allure:history": "mv -f allure-report/history allure-results/history && rimraf -r allure-report || true",
+    "allure:open": "allure open",
+    "test:cy": "cypress run --config video=false --env allure=true allure-report",
+    "test:allure:": "npm run test:cy && npm run allure:report",
+    "iChemTest": "npx cypress run --browser chrome --spec 'cypress/e2e/Tests/**/*.cy.js' --config-file cypress.config.js --config video=false --env allure=true allure-report allure generate allure-results && allure open allure-report"
   },
   "author": "Consolia doo",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^11.2.0"
-  }
+    "@shelex/cypress-allure-plugin": "^2.34.0",
+    "cypress": "^12.4.0",
+    "rimraf": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://dev04/main/tetrapak"
+  },
+  "keywords": []
 }
